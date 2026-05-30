@@ -52,6 +52,7 @@ Este projeto já está preparado para rodar no Railway como um app Node.js.
 
 1. Crie um novo projeto no Railway e importe este repositório do GitHub.
 2. Configure as variáveis de ambiente:
+   - `DATABASE_URL` (para PostgreSQL no Railway)
    - `JWT_SECRET`
    - `JWT_EXPIRY`
    - `HELPDESK_EMAIL`
@@ -61,6 +62,9 @@ Este projeto já está preparado para rodar no Railway como um app Node.js.
    - `RATE_LIMIT_MAX_REQUESTS`
 3. Defina o comando de start como `npm start`, ou use o `Procfile` já presente no repositório.
 4. Deploy.
+
+### Dica
+Use o plugin PostgreSQL do Railway para criar o banco e obter a `DATABASE_URL` automaticamente.
 
 ### Observação importante
 
