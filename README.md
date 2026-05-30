@@ -36,13 +36,37 @@ cp .env.example .env
 # Edite o .env com seus valores, especialmente JWT_SECRET
 ```
 
-### Rodando o servidor
+### Rodando o servidor localmente
 
 ```bash
 npm start
 ```
 
 A API ficará disponível em `http://localhost:3000`.
+
+## 🚄 Deploy no Railway
+
+Este projeto já está preparado para rodar no Railway como um app Node.js.
+
+### Passos rápidos
+
+1. Crie um novo projeto no Railway e importe este repositório do GitHub.
+2. Configure as variáveis de ambiente:
+   - `JWT_SECRET`
+   - `JWT_EXPIRY`
+   - `HELPDESK_EMAIL`
+   - `HELPDESK_PASSWORD`
+   - `HELPDESK_USER_ID`
+   - `RATE_LIMIT_WINDOW_MS`
+   - `RATE_LIMIT_MAX_REQUESTS`
+3. Defina o comando de start como `npm start`, ou use o `Procfile` já presente no repositório.
+4. Deploy.
+
+### Observação importante
+
+SQLite não é ideal em ambientes serverless como Railway, porque o armazenamento local pode ser temporário e não persistir entre instâncias.
+
+Para produção, recomendo usar um banco remoto como PostgreSQL via plugin Railway ou Supabase.
 
 ## 🔒 Testes de Segurança
 
@@ -113,7 +137,7 @@ helpdesk-api/
 
 ## 🌐 Deploy
 
-Este projeto está configurado para deploy na Vercel.
+Este projeto está configurado para deploy no Vercel e Railway.
 
 Variáveis de ambiente necessárias:
 
