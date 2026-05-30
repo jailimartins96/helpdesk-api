@@ -1,37 +1,55 @@
-🛡️ Helpdesk API — Security Lab
+# Helpdesk API — Security Lab
 
 API REST de helpdesk construída com Node.js + Express + SQLite, projetada como laboratório de segurança para identificar, documentar e corrigir vulnerabilidades reais seguindo a metodologia OWASP Top 10 2021.
 
+## 📌 Sobre o Projeto
 
-📌 Sobre o Projeto
 Este projeto nasceu com um objetivo claro: aprender segurança de APIs na prática.
 A API simula um sistema de tickets de suporte e foi deliberadamente construída com vulnerabilidades reais — depois auditada com uma suíte de testes de penetração própria, que cobre desde autenticação até rate limiting e XSS.
 Ideal para quem quer entender como APIs são atacadas e como defendê-las.
 
-⚙️ Stack
-TecnologiaUsoNode.js + Express 5Servidor HTTPSQLite (better-sqlite3)Banco de dadosJWT (jsonwebtoken)Autenticaçãoexpress-validatorValidação de entradaexpress-rate-limitProteção contra DoSdotenvGerenciamento de variáveis
+## ⚙️ Stack
 
-🚀 Como rodar
-Pré-requisitos
+| Tecnologia | Uso |
+| --- | --- |
+| Node.js + Express 5 | Servidor HTTP |
+| SQLite / better-sqlite3 | Banco de dados |
+| JWT (jsonwebtoken) | Autenticação |
+| express-validator | Validação de entrada |
+| express-rate-limit | Proteção contra DoS |
+| dotenv | Gerenciamento de variáveis |
 
-Node.js 18+
-npm
+## 🚀 Como rodar
 
-Instalação
-bashgit clone https://github.com/seu-usuario/helpdesk-api.git
+### Pré-requisitos
+
+- Node.js 18+
+- npm
+
+### Instalação
+
+```bash
+git clone https://github.com/jailimartins96/helpdesk-api.git
 cd helpdesk-api
-
 npm install
-
 cp .env.example .env
 # Edite o .env com seus valores, especialmente JWT_SECRET
-Rodando o servidor
-bashnpm start
-# Servidor em http://localhost:3000
+```
 
-🔒 Testes de Segurança
+### Rodando o servidor
+
+```bash
+npm start
+```
+
+A API ficará disponível em `http://localhost:3000`.
+
+## 🔒 Testes de Segurança
+
 Este projeto inclui 3 scripts de teste baseados no OWASP Top 10:
-bash# Menu interativo (recomendado para começar)
+
+```bash
+# Menu interativo (recomendado para começar)
 npm run test:security:quick
 
 # Suite completa automatizada
@@ -39,15 +57,30 @@ npm run test:security
 
 # Testes avançados de penetração com PoC
 npm run test:security:advanced
+```
 
-⚠️ Os testes devem ser executados com o servidor rodando em localhost:3000.
+> Os testes devem ser executados com o servidor rodando em `localhost:3000`.
 
+## 📊 Vulnerabilidades Mapeadas
 
-📊 Vulnerabilidades Mapeadas
-#VulnerabilidadeSeveridadeStatus1Falta de Autenticação🔴 CRÍTICADocumentada2Falta de Autorização🔴 CRÍTICADocumentada3IDOR (ID Enumeration)🟠 ALTADocumentada4Sem Validação de Entrada🟠 ALTADocumentada5Sem Rate Limiting🟠 ALTACorrigida ✅6Stored XSS🟡 MÉDIADocumentada7Missing Security Headers🟡 MÉDIADocumentada8CORS Permissivo🟡 MÉDIADocumentada9Database público🟡 MÉDIADocumentada10Sem Logging🟡 MÉDIADocumentada
-Risk Score: 75/100 (CRÍTICO — ambiente de estudo)
+| # | Vulnerabilidade | Severidade | Status |
+| --- | --- | --- | --- |
+| 1 | Falta de Autenticação | 🔴 CRÍTICO | Documentada |
+| 2 | Falta de Autorização | 🔴 CRÍTICO | Documentada |
+| 3 | IDOR (ID Enumeration) | 🟠 ALTA | Documentada |
+| 4 | Sem Validação de Entrada | 🟠 ALTA | Documentada |
+| 5 | Sem Rate Limiting | 🟠 ALTA | Corrigida ✅ |
+| 6 | Stored XSS | 🟡 MÉDIA | Documentada |
+| 7 | Missing Security Headers | 🟡 MÉDIA | Documentada |
+| 8 | CORS Permissivo | 🟡 MÉDIA | Documentada |
+| 9 | Database público | 🟡 MÉDIA | Documentada |
+| 10 | Sem Logging | 🟡 MÉDIA | Documentada |
 
-📁 Estrutura do Projeto
+**Risk Score:** 75/100 (CRÍTICO — ambiente de estudo)
+
+## 📁 Estrutura do Projeto
+
+```text
 helpdesk-api/
 ├── server.js                    # Entry point
 ├── routes/                      # Rotas da API
@@ -59,42 +92,52 @@ helpdesk-api/
 ├── RESUMO_EXECUTIVO.md          # Relatório executivo dos testes
 ├── .env.example                 # Template de variáveis de ambiente
 └── package.json
+```
 
-📋 Endpoints da API
-GET    /api/tickets          # Listar tickets
-GET    /api/tickets/:id      # Buscar ticket por ID
-POST   /api/tickets          # Criar ticket
-PUT    /api/tickets/:id      # Atualizar ticket
-DELETE /api/tickets/:id      # Remover ticket
+## 📋 Endpoints da API
 
-📖 Documentação de Segurança
-ArquivoConteúdoSEGURANÇA.mdAnálise técnica de cada vulnerabilidade + comandos CURL para reproduzirGUIA_CORRECOES.mdCódigo antes/depois para cada correçãoRESUMO_EXECUTIVO.mdRelatório executivo com matriz de risco e timelineTESTES_SEGURANÇA_README.mdComo executar cada teste e o que ele verifica
+- `GET /api/tickets` — Listar tickets
+- `GET /api/tickets/:id` — Buscar ticket por ID
+- `POST /api/tickets` — Criar ticket
+- `PUT /api/tickets/:id` — Atualizar ticket
+- `DELETE /api/tickets/:id` — Remover ticket
 
-🌐 Deploy
+## 📖 Documentação de Segurança
+
+| Arquivo | Conteúdo |
+| --- | --- |
+| `SEGURANÇA.md` | Análise técnica de cada vulnerabilidade + comandos CURL para reproduzir |
+| `GUIA_CORRECOES.md` | Código antes/depois para cada correção |
+| `RESUMO_EXECUTIVO.md` | Relatório executivo com matriz de risco e timeline |
+| `TESTES_SEGURANÇA_README.md` | Como executar cada teste e o que ele verifica |
+
+## 🌐 Deploy
+
 Este projeto está configurado para deploy na Vercel.
-Variáveis de ambiente necessárias (configurar no painel da Vercel):
-PORT
-NODE_ENV=production
-JWT_SECRET
-JWT_EXPIRY
-ALLOWED_ORIGINS
-RATE_LIMIT_WINDOW_MS
-RATE_LIMIT_MAX_REQUESTS
 
-🎓 O que você vai aprender
+Variáveis de ambiente necessárias:
 
-Como identificar vulnerabilidades em APIs REST
-Como escrever testes de penetração automatizados
-Como corrigir cada classe de vulnerabilidade (OWASP Top 10)
-Boas práticas de segurança com Express.js
+- `PORT`
+- `NODE_ENV=production`
+- `JWT_SECRET`
+- `JWT_EXPIRY`
+- `ALLOWED_ORIGINS`
+- `RATE_LIMIT_WINDOW_MS`
+- `RATE_LIMIT_MAX_REQUESTS`
 
+## 🎓 O que você vai aprender
 
-📚 Referências
+- Como identificar vulnerabilidades em APIs REST
+- Como escrever testes de penetração automatizados
+- Como corrigir cada classe de vulnerabilidade (OWASP Top 10)
+- Boas práticas de segurança com Express.js
 
-OWASP Top 10 2021
-OWASP API Security Top 10
-Express.js Security Best Practices
+## 📚 Referências
 
+- OWASP Top 10 2021
+- OWASP API Security Top 10
+- Express.js Security Best Practices
 
-📄 Licença
+## 📄 Licença
+
 MIT — use, estude, modifique à vontade.
