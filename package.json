@@ -1,0 +1,26 @@
+{
+  "name": "helpdesk-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node helpdesk-api/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:security": "node security-tests.js",
+    "test:security:advanced": "node advanced-security-tests.js",
+    "test:security:quick": "node quick-test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "better-sqlite3": "^12.10.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "express-validator": "^7.3.2",
+    "jsonwebtoken": "^9.0.3",
+    "sqlite3": "^6.0.1"
+  }
+}

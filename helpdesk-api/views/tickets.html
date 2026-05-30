@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickets - Helpdesk</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">Tickets</p>
+                <h1>Meus Tickets</h1>
+                <p class="page-description">Gerenciador de tickets de suporte.</p>
+            </div>
+            <nav class="top-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tickets">Tickets</a></li>
+                    <li><a href="/board">Quadro</a></li>
+                    <li><a href="/about">Sobre</a></li>
+                    <li><a href="/login">Login</a></li>
+                </ul>
+                <button id="theme-toggle" type="button" aria-label="Alternar modo noturno">
+                    <span id="theme-toggle-label">🌙 Modo Noturno</span>
+                </button>
+            </nav>
+        </header>
+
+        <main class="content-stack">
+            <section class="hero-card">
+                <div>
+                    <h2>Lista de Tickets</h2>
+                    <p>Cadastre novos chamados e acompanhe o andamento na interface principal.</p>
+                </div>
+            </section>
+
+            <section class="feature-card form-card">
+                <form id="ticket-form" class="ticket-form">
+                    <div class="field-grid">
+                        <div>
+                            <label for="titulo">Título</label>
+                            <input id="titulo" name="titulo" required>
+                        </div>
+                        <div>
+                            <label for="prioridade">Prioridade</label>
+                            <select id="prioridade" name="prioridade">
+                                <option>Normal</option>
+                                <option>Alta</option>
+                                <option>Baixa</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="descricao">Descrição</label>
+                        <textarea id="descricao" name="descricao" required></textarea>
+                    </div>
+
+                    <div>
+                        <label for="assignee">Responsável (opcional)</label>
+                        <input id="assignee" name="assignee">
+                    </div>
+
+                    <button type="submit">Criar ticket</button>
+                </form>
+            </section>
+
+            <section class="feature-card">
+                <div id="tickets-list" class="tickets-list"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/auth.js"></script>
+    <script src="/tickets.js"></script>
+    <script src="/theme.js"></script>
+</body>
+</html>

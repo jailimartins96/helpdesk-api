@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Helpdesk</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">Acesso da empresa</p>
+                <h1>Entrar no Helpdesk</h1>
+                <p class="page-description">Acesse o sistema com suas credenciais internas.</p>
+            </div>
+            <nav class="top-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tickets">Tickets</a></li>
+                    <li><a href="/board">Quadro</a></li>
+                    <li><a href="/about">Sobre</a></li>
+                </ul>
+                <button id="theme-toggle" type="button" aria-label="Alternar modo noturno">
+                    <span id="theme-toggle-label">🌙 Modo Noturno</span>
+                </button>
+            </nav>
+        </header>
+
+        <main class="content-stack">
+            <section class="hero-card">
+                <div>
+                    <h2>Login exclusivo para colaboradores</h2>
+                    <p>Após entrar, você será direcionado para a área de tickets.</p>
+                </div>
+            </section>
+
+            <section class="feature-card form-card">
+                <p id="auth-status">Entre com suas credenciais da empresa.</p>
+                <form id="login-form" class="ticket-form">
+                    <div class="field-grid">
+                        <div>
+                            <label for="login-email">Email</label>
+                            <input id="login-email" name="login-email" type="email" required>
+                        </div>
+                        <div>
+                            <label for="login-password">Senha</label>
+                            <input id="login-password" name="login-password" type="password" required>
+                        </div>
+                    </div>
+                    <button type="submit">Entrar</button>
+                </form>
+                <p><a href="/register">Criar nova conta</a></p>
+                <button id="logout-btn" type="button" hidden>Sair</button>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        window.helpdeskAuthRedirect = '/tickets';
+        window.helpdeskAuthMessage = new URLSearchParams(window.location.search).get('expired') === '1'
+            ? 'Sua sessão expirou. Faça login novamente.'
+            : 'Entre com suas credenciais da empresa.';
+    </script>
+    <script src="/auth.js"></script>
+    <script src="/theme.js"></script>
+</body>
+</html>

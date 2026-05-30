@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar conta - Helpdesk</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">Acesso da empresa</p>
+                <h1>Criar conta no Helpdesk</h1>
+                <p class="page-description">Cadastre-se com nome, email e senha para acessar o sistema.</p>
+            </div>
+            <nav class="top-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tickets">Tickets</a></li>
+                    <li><a href="/board">Quadro</a></li>
+                    <li><a href="/about">Sobre</a></li>
+                    <li><a href="/login">Login</a></li>
+                </ul>
+                <button id="theme-toggle" type="button" aria-label="Alternar modo noturno">
+                    <span id="theme-toggle-label">🌙 Modo Noturno</span>
+                </button>
+            </nav>
+        </header>
+
+        <main class="content-stack">
+            <section class="hero-card">
+                <div>
+                    <h2>Cadastro de colaborador</h2>
+                    <p>Após criar a conta, você será autenticado automaticamente e encaminhado para a área de tickets.</p>
+                </div>
+            </section>
+
+            <section class="feature-card form-card">
+                <p id="auth-status">Crie sua conta para acessar o helpdesk.</p>
+                <form id="register-form" class="ticket-form">
+                    <div class="field-grid">
+                        <div>
+                            <label for="register-name">Nome</label>
+                            <input id="register-name" name="register-name" type="text" required>
+                        </div>
+                        <div>
+                            <label for="register-email">Email</label>
+                            <input id="register-email" name="register-email" type="email" required>
+                        </div>
+                        <div>
+                            <label for="register-password">Senha</label>
+                            <input id="register-password" name="register-password" type="password" required minlength="8">
+                        </div>
+                        <div>
+                            <label for="register-confirm-password">Confirmar senha</label>
+                            <input id="register-confirm-password" name="register-confirm-password" type="password" required minlength="8">
+                        </div>
+                    </div>
+                    <button type="submit">Criar conta</button>
+                </form>
+                <p><a href="/login">Já tenho conta</a></p>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        window.helpdeskAuthRedirect = '/tickets';
+        window.helpdeskAuthMessage = 'Crie sua conta para acessar o helpdesk.';
+    </script>
+    <script src="/auth.js"></script>
+    <script src="/theme.js"></script>
+</body>
+</html>

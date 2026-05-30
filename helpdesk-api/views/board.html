@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadro - Helpdesk</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">Quadro</p>
+                <h1>Quadro Kanban</h1>
+                <p class="page-description">Acompanhe o fluxo dos chamados por etapa.</p>
+            </div>
+            <nav class="top-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/tickets">Tickets</a></li>
+                    <li><a href="/board">Quadro</a></li>
+                    <li><a href="/about">Sobre</a></li>
+                    <li><a href="/login">Login</a></li>
+                </ul>
+                <button id="theme-toggle" type="button" aria-label="Alternar modo noturno">
+                    <span id="theme-toggle-label">🌙 Modo Noturno</span>
+                </button>
+            </nav>
+        </header>
+
+        <main class="content-stack">
+            <section class="hero-card">
+                <div>
+                    <h2>Fluxo de atendimento</h2>
+                    <p>Arraste os cards entre as colunas para atualizar o status dos tickets.</p>
+                </div>
+            </section>
+
+            <section class="feature-card">
+                <div class="kanban">
+                    <div class="column" data-status="To Do">
+                        <h3>To Do</h3>
+                        <div class="list" id="todo"></div>
+                    </div>
+                    <div class="column" data-status="In Progress">
+                        <h3>In Progress</h3>
+                        <div class="list" id="inprogress"></div>
+                    </div>
+                    <div class="column" data-status="Done">
+                        <h3>Done</h3>
+                        <div class="list" id="done"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/auth.js"></script>
+    <script src="/board.js"></script>
+    <script src="/theme.js"></script>
+</body>
+</html>
