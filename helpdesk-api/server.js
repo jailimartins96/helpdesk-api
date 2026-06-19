@@ -21,13 +21,26 @@ const limiter = rateLimit({
     message: { error: 'Muitas requisições, tente novamente mais tarde.' }
 });
 
+// Servir arquivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use('/api', limiter);
+
+// Health check para Vercel
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 app.use(routes);
 
 app.use((req, res) => {
     res.status(404).json({ error: 'Página não encontrada' });
+});
+
+// Error handler para Vercel
+app.use((err, req, res, next) => {
+    console.error('Erro:', err);
+    res.status(500).json({ error: 'Erro interno do servidor', message: err.message });
 });
 
 // Para desenvolvimento local
