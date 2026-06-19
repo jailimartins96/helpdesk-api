@@ -1,5 +1,5 @@
 const crypto = require('crypto');
-const sqlite3 = require('sqlite3').verbose();
+const Database = require('better-sqlite3');
 const { Pool } = require('pg');
 const fs = require('fs');
 const path = require('path');
@@ -52,15 +52,14 @@ if (isPostgres) {
     console.log('Usando PostgreSQL como banco de dados.');
     logDatabase('Usando PostgreSQL como banco de dados.');
 } else {
-    db = new sqlite3.Database(dbPath, (err) => {
-        if (err) {
-            console.error('Erro ao abrir DB SQLite:', err.message);
-            logDatabase('Erro ao abrir DB SQLite: ' + err.message);
-        } else {
-            console.log('Conectado ao banco de dados SQLite.');
-            logDatabase('Conectado ao banco de dados SQLite.');
-        }
-    });
+    try {
+        db = new Database(dbPath);
+        console.log('Conectado ao banco de dados SQLite.');
+        logDatabase('Conectado ao banco de dados SQLite.');
+    } catch (err) {
+        console.error('Erro ao abrir DB SQLite:', err.message);
+        logDatabase('Erro ao abrir DB SQLite: ' + err.message);
+    }
 }
 
 function toPostgresQuery(sql, params = []) {
@@ -85,12 +84,11 @@ function dbAll(sql, params = []) {
         return pool.query(text, values).then((result) => result.rows);
     }
 
-    return new Promise((resolve, reject) => {
-        db.all(sql, params, (err, rows) => {
-            if (err) return reject(err);
-            resolve(rows);
-        });
-    });
+    try {
+        return Promise.resolve(db.prepare(sql).all(...params));
+    } catch (err) {
+        return Promise.reject(err);
+    }
 }
 
 function dbGet(sql, params = []) {
@@ -99,12 +97,11 @@ function dbGet(sql, params = []) {
         return pool.query(text, values).then((result) => result.rows[0]);
     }
 
-    return new Promise((resolve, reject) => {
-        db.get(sql, params, (err, row) => {
-            if (err) return reject(err);
-            resolve(row);
-        });
-    });
+    try {
+        return Promise.resolve(db.prepare(sql).get(...params));
+    } catch (err) {
+        return Promise.reject(err);
+    }
 }
 
 function dbRun(sql, params = []) {
@@ -120,12 +117,16 @@ function dbRun(sql, params = []) {
         }));
     }
 
-    return new Promise((resolve, reject) => {
-        db.run(sql, params, function callback(err) {
-            if (err) return reject(err);
-            resolve(this);
+    try {
+        const stmt = db.prepare(sql);
+        const result = stmt.run(...params);
+        return Promise.resolve({
+            lastID: result.lastInsertRowid ?? null,
+            rowCount: result.changes
         });
-    });
+    } catch (err) {
+        return Promise.reject(err);
+    }
 }
 
 function generateUserId() {
