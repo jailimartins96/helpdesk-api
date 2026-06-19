@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "helpdesk-api/server.js",
+      "src": "api/index.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "helpdesk-api/server.js"
+      "dest": "api/index.js"
     }
   ]
 }

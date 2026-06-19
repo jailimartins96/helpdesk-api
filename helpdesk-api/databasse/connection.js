@@ -4,7 +4,11 @@ const { Pool } = require('pg');
 const fs = require('fs');
 const path = require('path');
 
-const logDir = path.join(__dirname, '..', 'logs');
+const logDir = process.env.LOG_DIR
+    ? path.isAbsolute(process.env.LOG_DIR)
+        ? process.env.LOG_DIR
+        : path.resolve(process.cwd(), process.env.LOG_DIR)
+    : path.join(__dirname, '..', 'logs');
 const dbLogFile = path.join(logDir, 'db.log');
 const authLogFile = path.join(logDir, 'auth.log');
 

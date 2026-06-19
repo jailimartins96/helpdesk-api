@@ -30,11 +30,13 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Página não encontrada' });
 });
 
+// Para desenvolvimento local
 if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`Servidor rodando em http://localhost:${PORT}`);
     });
 }
 
+// Exporta para Vercel
 module.exports = app;
 

@@ -1,0 +1,17 @@
+app = "helpdesk-api"
+primary_region = "gru"
+
+kill_signal = "SIGINT"
+kill_timeout = 5
+
+[build]
+  image = "node:18-bullseye"
+
+[env]
+  PORT = "3000"
+  DB_PATH = "/data/helpdesk.db"
+  LOG_DIR = "/data/logs"
+
+[[mounts]]
+  source = "helpdesk-data"
+  destination = "/data"

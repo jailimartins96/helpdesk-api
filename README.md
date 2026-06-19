@@ -63,6 +63,24 @@ Este projeto já está preparado para rodar no Railway como um app Node.js.
 3. Defina o comando de start como `npm start`, ou use o `Procfile` já presente no repositório.
 4. Deploy.
 
+## Deploy no Fly.io
+
+1. Instale o CLI do Fly: `curl -L https://fly.io/install.sh | sh` ou use o instalador oficial.
+2. No diretório do projeto, inicialize o app:
+   - `flyctl launch --name helpdesk-api --region gru --no-deploy`
+3. Crie um volume persistente para SQLite e logs:
+   - `flyctl volumes create helpdesk-data --size 1 --region gru`
+4. Defina as variáveis de ambiente no Fly:
+   - `flyctl secrets set JWT_SECRET=seu_seguro_secret` \
+     `DB_PATH=/data/helpdesk.db` \
+     `LOG_DIR=/data/logs`
+5. Faça deploy:
+   - `flyctl deploy`
+
+### Notas
+- Para usar SQLite no Fly, mantenha `DB_PATH=/data/helpdesk.db` e `LOG_DIR=/data/logs`.
+- Se preferir PostgreSQL, crie um banco no Fly e use `DATABASE_URL` em vez de `DB_PATH`.
+
 ### Dica
 Use o plugin PostgreSQL do Railway para criar o banco e obter a `DATABASE_URL` automaticamente.
 
